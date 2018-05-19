@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="weather.css"> 
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="weather.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                document.getElementById("submit").onclick = function(){
+                    var searchValue = document.getElementsByTagName("input")[0].value;
+                    if(searchValue.length == 0){
+                        alert("Please enter an input!");
+                    }
+                    else{
+                        search(searchValue, function(results){
+                            <!-- upload weather forcast content on website-->
+                            document.getElementById("weather-card").innerHTML=results;
+                        });                  
+                    }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="weather">
+            <div class="search">
+                <input type="text" placeholder="city name">
+                <button type="submit" id="submit">Submit</button>
+            </div>
+            <div id="weather-card"></div>
+        </div>
+        <footer class="validator">
+            <a href="http://validator.w3.org/check/referer"><img src="w3c-html.png" alt="HTML Validator"></a>
+            <a href="http://jigsaw.w3.org/css-validator/check/referer"><img src="w3c-css.png" alt="CSS Validator"></a>
+        </footer>
+    </body>
+</html>
