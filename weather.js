@@ -1,9 +1,9 @@
 function search(searchValue, callBack){
     $.ajax({
         url: "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='"+searchValue+"')&format=json&callback=?",
-        dataType: 'jsonp',
-        jsonp: 'callback',
-        jsonpCallback: 'callBack',
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback: "callBack",
         success: function(data) {
             var results=data.query.results;
             var weeklyWeather = results.channel.item.forecast;
@@ -16,29 +16,28 @@ function search(searchValue, callBack){
                 var tag = "<p>"+w.day+" - "+w.text+". High: "+w.high+" Low: "+w.low+"</p>";
                 htmlFormat += tag;
             }
-            console.log(results.channel.link);
             var url = results.channel.link.split("*")
             htmlFormat += "<a href=\""+url[1]+"\"> Full Forecast at Yahoo! Weather</a><p>(provided by <a href=\"https://weather.com/\"> The Weather Channel</a>)</p></div></div>";
             callBack(htmlFormat);
         },
         error: function(request,status,error){
-            var msg = '<p>';
+            var msg = "<p>";
             if (request.status === 0) {
-                msg += 'Not connect.\n Verify Network.';
+                msg += "Not connect.\n Verify Network.";
             } else if (request.status == 404) {
-                msg += 'Requested page not found. [404]';
+                msg += "Requested page not found. [404]";
             } else if (request.status == 500) {
-                msg += 'Internal Server Error [500].';
-            } else if (error === 'parsererror') {
-                msg += 'Requested JSON parse failed.';
-            } else if (error === 'timeout') {
-                msg += 'Time out error.';
-            } else if (error === 'abort') {
-                msg += 'Ajax request aborted.';
+                msg += "Internal Server Error [500].";
+            } else if (error === "parsererror") {
+                msg += "Requested JSON parse failed.";
+            } else if (error === "timeout") {
+                msg += "Time out error.";
+            } else if (error === "abort") {
+                msg += "Ajax request aborted.";
             } else {
-                msg += 'Uncaught Error.\n' + request.responseText;
+                msg += "Uncaught Error.\n" + request.responseText;
             }
-            msg +='</p>';
+            msg +="</p>";
             callBack(msg);
         }
 

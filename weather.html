@@ -2,32 +2,31 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Weather Forecast</title>
         <link rel="stylesheet" href="weather.css"> 
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-        <script type="text/javascript" src="weather.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script src="weather.js"></script>
         <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                document.getElementById("submit").onclick = function(){
-                    var searchValue = document.getElementsByTagName("input")[0].value;
-                    if(searchValue.length == 0){
-                        alert("Please enter an input!");
-                    }
-                    else{
-                        search(searchValue, function(results){
-                            <!-- upload weather forcast content on website-->
-                            document.getElementById("weather-card").innerHTML=results;
-                        });                  
-                    }
+        document.addEventListener("DOMContentLoaded", function(event){
+            document.getElementById("search").onclick = function(){
+                var searchValue = document.getElementsByTagName("input")[0].value;
+                if(searchValue.length == 0){
+                    alert("Please enter an input!");
                 }
-            });
+                else{
+                    search(searchValue, function(results){
+                        document.getElementById("weather-card").innerHTML=results;
+                    });                  
+                }
+            }
+        });
         </script>
     </head>
     <body>
         <div id="weather">
             <div class="search">
                 <input type="text" placeholder="city name">
-                <button type="submit" id="submit">Submit</button>
+                <button id="search">Search</button>
             </div>
             <div id="weather-card"></div>
         </div>
