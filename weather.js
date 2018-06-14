@@ -1,6 +1,6 @@
 function search(searchValue, callBack){
     $.ajax({
-        url: "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='"+searchValue+"')&format=json&callback=?",
+        url: "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='"+searchValue+"') and u='c'&format=json&callback=?",
         dataType: "jsonp",
         jsonp: "callback",
         jsonpCallback: "callBack",
@@ -13,7 +13,7 @@ function search(searchValue, callBack){
 
             for(var i=0; i<5 ; i++){
                 var w = weeklyWeather[i];
-                var tag = "<p>"+w.day+" - "+w.text+". High: "+w.high+" Low: "+w.low+"</p>";
+                var tag = "<p>"+w.day+" - "+w.text+". High: "+w.high+"℃ Low: "+w.low+"℃</p>";
                 htmlFormat += tag;
             }
             var url = results.channel.link.split("*")
